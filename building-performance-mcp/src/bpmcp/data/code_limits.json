@@ -1,0 +1,110 @@
+{
+  "_readme": "Prescriptive limits used by the code checks. Each table has a 'status': 'verified' means it was cross-checked against a published source when this file was written; 'unverified' means it was entered from memory of the code and MUST be checked against your copy of the official code before you rely on it. Edit values here and set status to 'verified' once checked. U-values in W/m2K, LPD in W/m2 (ASHRAE tables are stored in the standard's IP units and converted).",
+
+  "ECBC2017": {
+    "title": "Energy Conservation Building Code 2017 (India, BEE) - commercial buildings",
+    "climate_zones": ["composite", "hot_dry", "warm_humid", "temperate", "cold"],
+    "levels": ["ECBC", "ECBC+", "SuperECBC"],
+    "roof_u": {
+      "status": "verified for ECBC level only",
+      "note": "ECBC level per Table 4-4 (all building types except school and hospitality, which have their own rows). ECBC+ / SuperECBC values are unverified.",
+      "values": {
+        "ECBC":      {"composite": 0.33, "hot_dry": 0.33, "warm_humid": 0.33, "temperate": 0.33, "cold": 0.28},
+        "ECBC+":     {"composite": 0.26, "hot_dry": 0.26, "warm_humid": 0.26, "temperate": 0.26, "cold": 0.20},
+        "SuperECBC": {"composite": 0.20, "hot_dry": 0.20, "warm_humid": 0.20, "temperate": 0.20, "cold": 0.20}
+      }
+    },
+    "wall_u": {
+      "status": "verified for ECBC level only",
+      "note": "ECBC level per Table 4-7 (all building types except no-star hotels, business and schools under 10,000 m2, which have relaxed rows). ECBC+ / SuperECBC values are unverified.",
+      "values": {
+        "ECBC":      {"composite": 0.40, "hot_dry": 0.40, "warm_humid": 0.40, "temperate": 0.55, "cold": 0.34},
+        "ECBC+":     {"composite": 0.34, "hot_dry": 0.34, "warm_humid": 0.34, "temperate": 0.55, "cold": 0.22},
+        "SuperECBC": {"composite": 0.22, "hot_dry": 0.22, "warm_humid": 0.22, "temperate": 0.22, "cold": 0.20}
+      }
+    },
+    "window_u": {
+      "status": "unverified",
+      "note": "Vertical fenestration assembly U-factor; applied to all compliance levels.",
+      "values": {"composite": 3.00, "hot_dry": 3.00, "warm_humid": 3.00, "temperate": 3.00, "cold": 3.00}
+    },
+    "window_shgc": {
+      "status": "unverified",
+      "note": "North-facing limit applies only to buildings at latitude >= 15 N. Non-north SHGC may be relaxed by external shading (SEF) - not modelled here.",
+      "non_north": {"composite": 0.27, "hot_dry": 0.27, "warm_humid": 0.27, "temperate": 0.27, "cold": 0.62},
+      "north":     {"composite": 0.50, "hot_dry": 0.50, "warm_humid": 0.50, "temperate": 0.50, "cold": 0.62},
+      "north_tolerance_deg": 15,
+      "north_min_latitude": 15
+    },
+    "min_vlt_by_wwr": {
+      "status": "unverified",
+      "note": "Minimum visible light transmittance for the overall WWR band [max_wwr, min_vlt].",
+      "bands": [[0.30, 0.27], [0.40, 0.20], [0.50, 0.16], [0.60, 0.13], [0.70, 0.11]]
+    },
+    "max_wwr":  {"status": "unverified", "value": 0.40, "note": "Prescriptive path limit; higher WWR needs whole-building performance compliance."},
+    "max_srr":  {"status": "unverified", "value": 0.05, "note": "Skylight-to-roof ratio."},
+    "lpd": {
+      "status": "unverified",
+      "note": "Interior lighting power, building area method (W/m2).",
+      "values": {
+        "office": {"ECBC": 9.5, "ECBC+": 7.6, "SuperECBC": 5.0}
+      }
+    }
+  },
+
+  "ENS2018": {
+    "title": "Eco-Niwas Samhita 2018 Part 1 (India, BEE) - residential envelope",
+    "climate_zones": ["composite", "hot_dry", "warm_humid", "temperate", "cold"],
+    "levels": ["ENS"],
+    "roof_u": {
+      "status": "unverified",
+      "note": "Maximum roof U-value, all climate zones.",
+      "values": {"ENS": {"composite": 1.2, "hot_dry": 1.2, "warm_humid": 1.2, "temperate": 1.2, "cold": 1.2}}
+    },
+    "min_openable_wfr": {
+      "status": "unverified",
+      "note": "Minimum openable window-to-floor-area ratio for natural ventilation.",
+      "values": {"composite": 0.125, "hot_dry": 0.10, "warm_humid": 0.1666, "temperate": 0.125, "cold": 0.0833}
+    },
+    "_not_yet_implemented": "RETV (<= 15 W/m2 outside the cold zone) and U-envelope for the cold zone need the orientation-factor tables; planned for a later phase."
+  },
+
+  "ASHRAE90.1-2019": {
+    "title": "ANSI/ASHRAE/IES Standard 90.1-2019 - nonresidential spaces, climate zones 0-3",
+    "climate_zones": ["0", "1", "2", "3"],
+    "levels": ["90.1-2019"],
+    "units": "IP (Btu/h.ft2.F, W/ft2) - converted to SI in results",
+    "roof_u_ip": {
+      "status": "unverified",
+      "note": "Roof with insulation entirely above deck, nonresidential (Tables 5.5-0 to 5.5-3).",
+      "values": {"0": 0.048, "1": 0.048, "2": 0.039, "3": 0.039}
+    },
+    "wall_u_ip": {
+      "status": "unverified",
+      "note": "Above-grade walls, nonresidential (Tables 5.5-0 to 5.5-3).",
+      "mass":         {"0": 0.580, "1": 0.580, "2": 0.151, "3": 0.123},
+      "steel_framed": {"0": 0.124, "1": 0.124, "2": 0.084, "3": 0.077}
+    },
+    "window_u_ip": {
+      "status": "unverified",
+      "note": "Vertical fenestration assembly U-factor, nonresidential.",
+      "fixed":    {"0": 0.50, "1": 0.50, "2": 0.45, "3": 0.42},
+      "operable": {"0": 0.62, "1": 0.62, "2": 0.60, "3": 0.54}
+    },
+    "window_shgc": {
+      "status": "unverified",
+      "note": "Vertical fenestration SHGC (all orientations), nonresidential.",
+      "values": {"0": 0.22, "1": 0.23, "2": 0.25, "3": 0.25}
+    },
+    "max_wwr": {"status": "unverified", "value": 0.40},
+    "max_srr": {"status": "unverified", "value": 0.03},
+    "lpd_ip": {
+      "status": "unverified",
+      "note": "Table 9.5.1 building area method (W/ft2), before addendum bb which lowered several values.",
+      "values": {
+        "office": 0.64, "retail": 0.84, "school": 0.72, "hospital": 0.96,
+        "hotel": 0.56, "multifamily": 0.45, "warehouse": 0.45
+      }
+    }
+  }
+}

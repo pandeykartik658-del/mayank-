@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "building-performance-mcp"
+version = "0.1.0"
+description = "MCP server giving Claude building-performance tools: climate, sun and shading, facade radiation, envelope code checks (ECBC / ENS / ASHRAE 90.1), lighting and daylight estimates."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "ladybug-core>=0.42",
+    "mcp>=1.2",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+bpmcp = "bpmcp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+bpmcp = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
